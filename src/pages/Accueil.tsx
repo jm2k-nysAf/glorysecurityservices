@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { 
   Shield, 
   Camera, 
@@ -15,7 +16,9 @@ import {
   Phone,
   Award,
   Clock,
-  Users
+  Users,
+  HelpCircle,
+  MessageSquare
 } from 'lucide-react';
 
 const Accueil = () => {
@@ -80,6 +83,25 @@ const Accueil = () => {
     }
   ];
 
+  const frequentQuestions = [
+    {
+      question: 'Quels sont vos services principaux ?',
+      answer: 'Nous proposons : vidéosurveillance, alarmes anti-intrusion, clôtures électriques, motorisation de portails, contrôle d\'accès et formation.'
+    },
+    {
+      question: 'Le devis est-il gratuit ?',
+      answer: 'Oui, tous nos devis sont entièrement gratuits et sans engagement. Nous nous déplaçons sur site pour évaluer vos besoins.'
+    },
+    {
+      question: 'En combien de temps installez-vous un système ?',
+      answer: 'En moyenne 48h à 72h selon la complexité du site.'
+    },
+    {
+      question: 'Offrez-vous un service après-vente ?',
+      answer: 'Oui, un service après-vente et une maintenance préventive sont inclus dans nos contrats.'
+    }
+  ];
+
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
@@ -99,14 +121,18 @@ const Accueil = () => {
             </div>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-in">
-              <Button size="lg" className="bg-white text-gls-blue hover:bg-white/90 shadow-gls-lg">
-                <Phone className="mr-2 h-5 w-5" />
-                Devis Gratuit
-              </Button>
-              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-gls-blue">
-                Nos Services
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
+              <Link to="/contact">
+                <Button size="lg" className="bg-white text-gls-blue hover:bg-white/90 shadow-gls-lg">
+                  <Phone className="mr-2 h-5 w-5" />
+                  Devis Gratuit
+                </Button>
+              </Link>
+              <Link to="/services">
+                <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-gls-blue">
+                  Nos Services
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
@@ -170,10 +196,12 @@ const Accueil = () => {
                       </li>
                     ))}
                   </ul>
-                  <Button variant="outline" className="w-full group-hover:bg-primary group-hover:text-white">
-                    En savoir plus
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </Button>
+                  <Link to="/services">
+                    <Button variant="outline" className="w-full group-hover:bg-primary group-hover:text-white">
+                      En savoir plus
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </Button>
+                  </Link>
                 </CardContent>
               </Card>
             ))}
@@ -221,6 +249,53 @@ const Accueil = () => {
                 <p className="text-muted-foreground">Garantie sur tous nos équipements et services avec maintenance incluse.</p>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="py-20 bg-muted/30">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center space-y-4 mb-16">
+              <h2 className="text-3xl md:text-4xl font-bold text-gradient">Questions Fréquentes</h2>
+              <p className="text-xl text-muted-foreground">Trouvez rapidement les réponses à vos questions</p>
+            </div>
+            
+            <Card className="card-gradient">
+              <CardContent className="p-6">
+                <Accordion type="single" collapsible className="space-y-4">
+                  {frequentQuestions.map((faq, index) => (
+                    <AccordionItem key={index} value={`item-${index}`} className="border-b border-border/50 last:border-0">
+                      <AccordionTrigger className="text-left hover:no-underline py-4">
+                        <div className="flex items-center space-x-3">
+                          <HelpCircle className="h-5 w-5 text-primary flex-shrink-0" />
+                          <span className="font-medium">{faq.question}</span>
+                        </div>
+                      </AccordionTrigger>
+                      <AccordionContent className="pb-4 pl-8 text-muted-foreground">
+                        {faq.answer}
+                      </AccordionContent>
+                    </AccordionItem>
+                  ))}
+                </Accordion>
+                
+                <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8 pt-6 border-t border-border/50">
+                  <Link to="/faq">
+                    <Button variant="outline">
+                      <HelpCircle className="mr-2 h-4 w-4" />
+                      Voir toutes les FAQ
+                    </Button>
+                  </Link>
+                  <Link to="/contact">
+                    <Button className="btn-gradient">
+                      <MessageSquare className="mr-2 h-4 w-4" />
+                      Poser une question
+                    </Button>
+                  </Link>
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>

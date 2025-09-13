@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
+import { generateRAGResponse } from '@/lib/ragSystem';
 import { 
   MessageCircle, 
   X, 
@@ -37,12 +38,13 @@ const ChatWidget = () => {
     setMessages(prev => [...prev, newMessage]);
     setMessage('');
 
-    // Simulate bot response
+    // Generate RAG response
     setTimeout(() => {
+      const ragResponse = generateRAGResponse(message);
       const botResponse = {
         id: messages.length + 2,
         type: 'bot' as const,
-        content: 'Merci pour votre message ! Un de nos experts va vous répondre dans les plus brefs délais. Pour une réponse immédiate, vous pouvez nous appeler au 05 07 20 87 90.',
+        content: ragResponse,
         timestamp: new Date()
       };
       setMessages(prev => [...prev, botResponse]);
@@ -122,7 +124,7 @@ const ChatWidget = () => {
                         ? 'bg-primary text-primary-foreground' 
                         : 'bg-muted text-muted-foreground'
                     }`}>
-                      {msg.content}
+                      <div className="whitespace-pre-line">{msg.content}</div>
                     </div>
                   </div>
                 </div>
