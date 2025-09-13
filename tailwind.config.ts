@@ -13,12 +13,31 @@ export default {
       },
     },
     extend: {
+      fontFamily: {
+        inter: ['Inter', 'sans-serif'],
+        playfair: ['Playfair Display', 'serif'],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
+        
+        // Glory Security Services brand colors
+        gls: {
+          orange: {
+            DEFAULT: "hsl(var(--gls-orange))",
+            light: "hsl(var(--gls-orange-light))",
+            dark: "hsl(var(--gls-orange-dark))",
+          },
+          blue: {
+            DEFAULT: "hsl(var(--gls-blue))",
+            light: "hsl(var(--gls-blue-light))",
+            dark: "hsl(var(--gls-blue-dark))",
+          },
+        },
+        
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
@@ -84,6 +103,16 @@ export default {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "float": "float 6s ease-in-out infinite",
+        "slide-up": "slideUp 0.8s ease-out",
+        "fade-in": "fadeIn 1s ease-out",
+        "pulse-slow": "pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+      },
+      backgroundImage: {
+        'gradient-hero': 'var(--gradient-hero)',
+        'gradient-card': 'var(--gradient-card)',
+        'gradient-button': 'var(--gradient-button)',
+        'gradient-text': 'var(--gradient-text)',
       },
     },
   },
